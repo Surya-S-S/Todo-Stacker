@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "task"
+		},
+		{
+			"name": "eureka",
+			"path": "eureka"
+		},
+		{
+			"path": "api-gateway"
+		},
+		{
+			"name": "user",
+			"path": "user"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"java.compile.nullAnalysis.mode": "automatic"
+	}
+}

@@ -1,0 +1,50 @@
+services:
+
+  eureka-server:
+    image: eureka-server:latest
+    container_name: eureka-server
+    build: ./eureka
+    ports:
+      - 8761:8761
+  
+  api-gateway:
+    image: api-gateway:latest
+    container_name: api-gateway
+    build: ./api-gateway
+    ports:
+      - 8081:8081
+    depends_on:
+      - eureka-server      
+    environment:
+      - eureka.client.serviceUrl.defaultZone = http://eureka-server:8761/eureka
+
+  user-service:
+    image: user-service:latest
+    container_name: user-service
+    build: ./user
+    ports:
+      - 8082:8082
+    depends_on:
+      - eureka-server
+    environment:
+      - spring.datasource.url = jdbc:postgresql://host.docker.internal:5432/UserDB
+      - eureka.client.serviceUrl.defaultZone = http://eureka-server:8761/eureka
+
+  task-service:
+    image: task-service:latest
+    container_name: task-service
+    build: ./task
+    ports:
+      - 8083:8083
+    depends_on:
+      - eureka-server
+    environment:
+      - spring.datasource.url = jdbc:postgresql://host.docker.internal:5432/TaskDB
+      - eureka.client.serviceUrl.defaultZone = http://eureka-server:8761/eureka
+
+  # frontend:
+  #   image: todo-frontend:latest
+  #   container_name: todo-frontend
+  #   build: ./todo-app
+  #   ports:
+  #     - 3000:3000
