@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.alert {
+  padding: 6px !important;
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+}
